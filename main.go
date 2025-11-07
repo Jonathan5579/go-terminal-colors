@@ -28,15 +28,17 @@ const PROGRESS_BAR_ELEMENT = "━"
 func main() {
 
 	log.Info("Surprisingly, colors in terminal output is just text surrounded by special characters:\n")
-	fmt.Println("\033[30m Black \033[30m \033[31m Red \033[31m \033[32m Green \033[32m \033[33m Yellow \033[33m \033[34m Blue \033[34m \033[35m Magenta \033[35m \033[36m Cyan \033[36m \033[37m Gray \033[37m \033[97m White \033[97m \033[0m Reset \033[0m")
+	fmt.Println("\033[31m Red \033[31m \033[32m Green \033[32m \033[33m Yellow \033[33m \033[34m Blue \033[34m \033[35m Magenta \033[35m \033[36m Cyan \033[36m \033[37m Gray \033[37m")
 	fmt.Println("")
+	time.Sleep(4000 * time.Millisecond)
 
-	log.Info("Paused Progress to illustrate process: move cursor to left, write output. Repeat:\n")
+	log.Info("Inline progress bar works by: move cursor to left, write output. Repeat:\n")
+	time.Sleep(2000 * time.Millisecond)
 	PausedProgress()
 	fmt.Println("")
 
 	log.Info("With this and colors you can make beautiful progress bars:\n")
-	BeautyProgressBar(TERMINAL_BLACK)
+	time.Sleep(3000 * time.Millisecond)
 	BeautyProgressBar(TERMINAL_RED)
 	BeautyProgressBar(TERMINAL_GREEN)
 	BeautyProgressBar(TERMINAL_YELLOW)
@@ -44,18 +46,15 @@ func main() {
 	BeautyProgressBar(TERMINAL_MAGENTA)
 	BeautyProgressBar(TERMINAL_CYAN)
 	BeautyProgressBar(TERMINAL_GRAY)
-	BeautyProgressBar(TERMINAL_WHITE)
 	fmt.Println(TERMINAL_RESET_COLOR)
 
-	log.Info("And you could artificially control the colors:\n")
-	AutomaticColorProgressBar()
-	AutomaticColorProgressBar()
+	log.Info("Artificially go red -> yellow -> green:\n")
+	time.Sleep(3000 * time.Millisecond)
 	AutomaticColorProgressBar()
 	fmt.Println(TERMINAL_RESET_COLOR)
 
-	log.Info("Rainbow progress bar showcase:\n")
-	RainbowProgressBar()
-	RainbowProgressBar()
+	log.Info("Or a rainbow:\n")
+	time.Sleep(2000 * time.Millisecond)
 	RainbowProgressBar()
 }
 
@@ -74,7 +73,7 @@ func PausedProgress(){
 		if err != nil { return }
 	}
 
-	writeToOutput(writer, fmt.Sprintf("%s  Done!\n",progressOutput))
+	writeToOutput(writer, fmt.Sprintf("%s\n",progressOutput))
 }
 
 func BeautyProgressBar(color string){
@@ -102,10 +101,10 @@ func AutomaticColorProgressBar(){
 	progressOutput := ""
 
 	for i := 1; i<=100; i++{
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(25 * time.Millisecond)
 
 		color:= TERMINAL_YELLOW
-		if i <= 15{
+		if i <= 30{
 			color = TERMINAL_RED
 		}
 		if i == 100{
@@ -128,7 +127,7 @@ func RainbowProgressBar(){
 	progressOutput := ""
 
 	for i := 1; i<=100; i++{
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(25 * time.Millisecond)
 
 		color := auxRainbowColors(i)
 
